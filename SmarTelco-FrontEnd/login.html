@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartTelco: Masuk atau Daftar</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        <nav id="navbar-menu">
+        </nav>
+    </header>
+
+    <main class="container login-container">
+        <section class="card auth-card">
+            
+            <div id="auth-title">
+                <h2 id="form-title">Masuk ke Sistem</h2>
+            </div>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" required placeholder="email@contoh.com">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" required placeholder="********">
+                </div>
+                <button type="submit" class="btn-primary">Masuk</button>
+            </form>
+
+            <form id="register-form" class="auth-form hidden">
+                <div class="form-group">
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required placeholder="email@contoh.com">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" required placeholder="Buat password">
+                </div>
+                <button type="submit" class="btn-primary">Daftar</button>
+            </form>
+            
+            <p id="login-message" class="status-text"></p>
+
+            <button type="button" class="btn-secondary" id="toggle-btn" onclick="toggleView()">
+                Belum punya akun? Daftar sekarang!
+            </button>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 SmartTelco ML Recommender System</p>
+    </footer>
+
+    <script src="assets/js/nav.js"></script> 
+    <script src="assets/js/login.js"></script>
+</body>
+</html>
