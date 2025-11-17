@@ -549,3 +549,13 @@ body {
         font-size: 0.8rem;
     }
 }
+
+.hidden {
+    display: none !important; /* Gunakan !important untuk memastikan form tersembunyi */
+}
+
+/* Auth Form Styling */
+.auth-form {
+    /* Atur tampilan form agar tidak tumpang tindih */
+    margin-top: 1rem; 
+}
