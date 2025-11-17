@@ -1,10 +1,16 @@
 {
-    "next_customer_id": 10002,
+    "next_customer_id": 10003,
     "users": [
         {
             "customer_id": "C10001",
             "email": "gogo@gogo.com",
             "password": "gogo1234",
+            "role": "User"
+        },
+        {
+            "customer_id": "C10002",
+            "email": "baba@baba.com",
+            "password": "baba1234",
             "role": "User"
         }
     ]

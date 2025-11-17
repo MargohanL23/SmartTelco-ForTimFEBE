@@ -7,13 +7,9 @@ function loadHistory() {
     const noHistoryMessage = document.getElementById('no-history-message');
     const customerId = localStorage.getItem('currentUserId');
     
-    // Ambil semua riwayat
     const allHistory = JSON.parse(localStorage.getItem('predictionHistory') || '[]');
-    
-    // Filter riwayat hanya untuk pengguna yang sedang login
     const userHistory = allHistory.filter(record => record.id === customerId);
     
-    // Kosongkan tabel
     tableBody.innerHTML = '';
 
     if (userHistory.length === 0) {
@@ -30,24 +26,37 @@ function loadHistory() {
     userHistory.forEach(record => {
         const row = tableBody.insertRow();
         
-        // Kolom 1: Tanggal
         row.insertCell().textContent = record.date;
-        
-        // Kolom 2: ID Pelanggan
         row.insertCell().textContent = record.id;
-        
-        // Kolom 3: Rekomendasi Utama
         row.insertCell().textContent = record.recommendation;
-        
-        // Kolom 4: Keyakinan
         row.insertCell().textContent = record.confidence;
         
-        // Kolom 5: Lihat Profil (Link untuk simulasi ulang)
+        // Kolom 5: Lihat Hasil (Link untuk memuat hasil lama)
         const profileCell = row.insertCell();
-        const profileLink = document.createElement('a');
-        profileLink.href = `data_input.html?load_id=${record.id}`;
-        profileLink.textContent = 'Lihat Profil';
-        profileLink.className = 'btn-link';
-        profileCell.appendChild(profileLink);
+        const viewLink = document.createElement('a');
+        
+        viewLink.href = '#';
+        viewLink.textContent = 'Lihat Hasil'; // Ganti teks
+        viewLink.className = 'btn-link';
+        
+        // FUNGSI BARU: Simpan hasil historis ke LocalStorage saat tombol diklik
+        viewLink.onclick = () => {
+            // 1. Simpan data input dan hasil lama ke key yang sama dengan hasil prediksi baru
+            localStorage.setItem('recommendationResult', JSON.stringify({
+                status: 'success',
+                recommended_offer: record.recommendation,
+                confidence: record.confidence,
+                alternatives: record.alternatives || [] // Pastikan alternatif ada
+            }));
+            localStorage.setItem('customerInput', JSON.stringify(record.input));
+            
+            // 2. Tandai bahwa ini berasal dari riwayat (Opsional, tapi bagus)
+            localStorage.setItem('isHistoryView', 'true');
+            
+            // 3. Redirect ke halaman hasil
+            window.location.href = 'result.html';
+        };
+        
+        profileCell.appendChild(viewLink);
     });
 }

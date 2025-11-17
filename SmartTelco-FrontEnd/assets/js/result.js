@@ -1,43 +1,36 @@
 // SmartTelco-FrontEnd/assets/js/result.js
 
-// --- FUNGSI RIWAYAT (BARU) ---
+// --- FUNGSI RIWAYAT (DIREVISI untuk menyimpan Alternatif) ---
 function saveHistory(result, customerId, inputData) {
-    // Ambil riwayat yang sudah ada (atau buat array kosong)
     let history = JSON.parse(localStorage.getItem('predictionHistory') || '[]');
     
-    // Buat objek riwayat baru
+    // Pastikan kita menyimpan data alternatif dari hasil prediksi
     const newRecord = {
         date: new Date().toLocaleString(),
         id: customerId,
         recommendation: result.recommended_offer,
         confidence: result.confidence,
-        // Menyimpan data input mentah agar bisa dilihat/diulang dari halaman riwayat
+        alternatives: result.alternatives, // SIMPAN ALTERNATIF DI RIWAYAT
         input: inputData 
     };
     
-    // Tambahkan record baru ke awal array (terbaru di atas)
     history.unshift(newRecord);
     
-    // Batasi jumlah riwayat (misalnya 50 record) agar Local Storage tidak penuh
     if (history.length > 50) {
         history.pop();
     }
     
-    // Simpan kembali ke Local Storage
     localStorage.setItem('predictionHistory', JSON.stringify(history));
 }
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Ambil data dari Local Storage
-    // KITA HARUS MENGUBAH NAMA KEY STORAGE AGAR KONSISTEN DENGAN YANG KITA SIMPAN SEBELUMNYA
-    // Asumsi: 'recommendationResult' dan 'customerInput' adalah key yang digunakan di script.js
     const resultJson = localStorage.getItem('recommendationResult');
     const inputJson = localStorage.getItem('customerInput');
-    const customerId = localStorage.getItem('currentUserId'); // Ambil ID pengguna yang sedang login
+    const customerId = localStorage.getItem('currentUserId');
+    const isHistoryView = localStorage.getItem('isHistoryView'); // Cek apakah ini dari riwayat
     
     if (!resultJson || !inputJson) {
-        // Jika data tidak ada, redirect kembali ke halaman simulasi
         alert("Silakan lakukan simulasi terlebih dahulu.");
         window.location.href = 'data_input.html';
         return;
@@ -46,12 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const result = JSON.parse(resultJson);
     const inputData = JSON.parse(inputJson);
 
-    // --- PANGGIL FUNGSI RIWAYAT SETELAH DATA DIBACA ---
-    if (result && customerId) {
+    // --- PANGGIL FUNGSI RIWAYAT HANYA JIKA BUKAN DARI VIEW RIWAYAT ---
+    if (result && customerId && isHistoryView !== 'true') {
         saveHistory(result, customerId, inputData); 
-        // Sekarang kita simpan juga inputData untuk referensi
     }
-    // --------------------------------------------------
+    // ------------------------------------------------------------------
 
     // 2. Tampilkan Rekomendasi Utama
     const offerNameElement = document.getElementById('offer-name');
@@ -61,29 +53,30 @@ document.addEventListener('DOMContentLoaded', () => {
     offerNameElement.textContent = result.recommended_offer;
     confidenceElement.textContent = result.confidence;
 
-    // Tentukan alasan rekomendasi secara dinamis (sangat penting untuk lomba)
     const reason = generateReason(result.recommended_offer, inputData);
     reasonElement.innerHTML = reason;
 
-    // Tampilkan fakta ringkas pelanggan
     displaySummaryFacts(inputData);
     
     // 3. Tampilkan Rekomendasi Alternatif
-    displayAlternatives(result.alternatives);
+    displayAlternatives(result.alternatives || []); // Pastikan selalu array
     
-    // Hapus data dari Local Storage setelah ditampilkan (agar tidak ter-save dobel saat refresh)
-    localStorage.removeItem('recommendationResult');
-    localStorage.removeItem('customerInput');
+    // Hapus data dari Local Storage
+    // HANYA HAPUS JIKA INI ADALAH PREDIKSI BARU, agar riwayat bisa diakses kembali
+    if (isHistoryView !== 'true') {
+        localStorage.removeItem('recommendationResult');
+        localStorage.removeItem('customerInput');
+    }
+    // Hapus flag riwayat agar navigasi selanjutnya dianggap prediksi baru
+    localStorage.removeItem('isHistoryView'); 
 });
 
 
-// --- FUNGSI PENDUKUNG ---
+// --- FUNGSI PENDUKUNG LAINNYA TETAP SAMA ---
 
-// Fungsi untuk membuat alasan dinamis berdasarkan hasil prediksi dan input
 function generateReason(offer, data) {
+    // ... (Fungsi ini tetap sama, Anda sudah membuatnya dengan baik)
     let reason = "Analisis mendalam terhadap profil Anda menunjukkan bahwa paket ini adalah yang paling optimal. ";
-    
-    // Format pengeluaran
     const spend = (data.monthly_spend / 1000).toLocaleString('id-ID');
     
     switch (offer) {
@@ -114,12 +107,10 @@ function generateReason(offer, data) {
     return reason;
 }
 
-// Fungsi untuk menampilkan fakta ringkas input pelanggan
 function displaySummaryFacts(data) {
+    // ... (Fungsi ini tetap sama)
     const factsContainer = document.getElementById('summary-facts');
     factsContainer.innerHTML = '';
-    
-    // Array fakta yang ingin ditampilkan
     const facts = [
         { label: 'Jenis Paket', value: data.plan_type, icon: '📞' },
         { label: 'Data Bulanan', value: `${data.avg_data_usage_gb.toFixed(1)} GB`, icon: '🌐' },
@@ -137,10 +128,10 @@ function displaySummaryFacts(data) {
     });
 }
 
-// Fungsi untuk menampilkan rekomendasi alternatif
 function displayAlternatives(alternatives) {
+    // ... (Fungsi ini tetap sama)
     const alternativesContainer = document.getElementById('alternatives-list');
-    alternativesContainer.innerHTML = ''; // Bersihkan konten lama
+    alternativesContainer.innerHTML = ''; 
 
     if (alternatives.length === 0) {
         alternativesContainer.innerHTML = '<p class="text-muted">Model tidak menemukan rekomendasi alternatif yang kuat (probabilitas > 5%).</p>';
@@ -150,7 +141,6 @@ function displayAlternatives(alternatives) {
     alternatives.forEach(alt => {
         const item = document.createElement('div');
         item.className = 'alternative-card';
-        // alt berisi "Nama Penawaran (XX.X%)"
         item.innerHTML = `
             <h4>${alt.split(' (')[0]}</h4>
             <span class="alt-prob">${alt.split(' (')[1]}</span>
