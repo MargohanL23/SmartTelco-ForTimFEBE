@@ -1,50 +1,65 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="w-full max-w-md bg-white shadow-md rounded-xl p-6">
-      <h2 class="text-2xl font-bold text-center mb-6">SmartTelco Register</h2>
+  <div class="min-h-screen flex items-center justify-center" style="background-color: #FFECC8;">
+    <div class="w-full max-w-md rounded-xl shadow-xl p-8" style="background-color: #842A3B22;">
 
-      <form @submit.prevent="handleRegister" class="space-y-4">
-        
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img
+          class="mx-auto h-12 w-auto"
+          src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=rose&shade=500"
+          alt="SmartTelco"
+        />
+        <h2 class="mt-8 text-center text-2xl font-bold tracking-tight" style="color:#842A3B;">
+          SmartTelco Register
+        </h2>
+      </div>
+
+      <form @submit.prevent="handleRegister" class="mt-10 space-y-6">
+
         <div>
-          <label class="block mb-1 font-medium">Email</label>
+          <label class="block text-sm font-medium" style="color:#842A3B;">Email</label>
           <input
             v-model="email"
             type="email"
-            class="w-full border rounded-lg px-3 py-2"
-            placeholder="example@mail.com"
             required
+            class="block w-full rounded-md bg-white/60 px-3 py-2 text-gray-800 placeholder-gray-500 shadow-sm outline-none"
+            placeholder="example@mail.com"
           />
         </div>
 
         <div>
-          <label class="block mb-1 font-medium">Password</label>
+          <label class="block text-sm font-medium" style="color:#842A3B;">Password</label>
           <input
             v-model="password"
             type="password"
-            class="w-full border rounded-lg px-3 py-2"
-            placeholder="Minimal 6 karakter"
             required
+            class="block w-full rounded-md bg-white/60 px-3 py-2 text-gray-800 placeholder-gray-500 shadow-sm outline-none"
+            placeholder="Minimal 6 karakter"
           />
         </div>
 
-        <p v-if="errorMsg" class="text-red-600 text-sm">{{ errorMsg }}</p>
+        <p v-if="errorMsg" class="text-red-700 text-sm text-center">{{ errorMsg }}</p>
 
         <button
           type="submit"
-          class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
+          class="w-full rounded-md px-3 py-2 text-white font-semibold shadow-md hover:opacity-90"
+          style="background-color:#842A3B;"
         >
           Register
         </button>
 
-        <p class="text-sm text-center">
+        <p class="text-sm text-center mt-4" style="color:#842A3B;">
           Sudah punya akun?
-          <router-link to="/login" class="text-blue-600">Login di sini</router-link>
+          <router-link to="/login" class="font-semibold hover:underline" style="color:#842A3B;">
+            Login di sini
+          </router-link>
         </p>
-
       </form>
+
     </div>
   </div>
 </template>
+
+
 
 <script>
 // --- PERBAIKAN ---
