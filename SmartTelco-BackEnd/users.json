@@ -1,5 +1,5 @@
 {
-    "next_customer_id": 10005,
+    "next_customer_id": 10007,
     "users": [
         {
             "customer_id": "C10001",
@@ -23,6 +23,18 @@
             "customer_id": "C10004",
             "email": "contoh1@gmail.com",
             "password": "contoh321",
+            "role": "User"
+        },
+        {
+            "customer_id": "C10005",
+            "email": "coba@gmail.com",
+            "password": "coba@123",
+            "role": "User"
+        },
+        {
+            "customer_id": "C10006",
+            "email": "coba1@gmail.com",
+            "password": "coba@123",
             "role": "User"
         }
     ]
