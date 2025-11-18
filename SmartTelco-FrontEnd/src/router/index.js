@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue';
 import RegistrationView from '../views/RegistrationView.vue';
 import HomeView from '../views/HomeView.vue';
 import HasilView from '../views/HasilView.vue'; // Pastikan file ini ada (sebelumnya ResultView.vue)
+import AdminUserDetailView from '../views/AdminUserDetailView.vue';
 
 // Admin Views (Pastikan file ini ada jika belum dibuat, atau komentari dulu)
 import AdminView from '../views/AdminView.vue';
@@ -23,6 +24,7 @@ const routes = [
 
   // Admin Area
   { path: '/admin', component: AdminView },
+  { path: '/admin/user/:id', component: AdminUserDetailView },
 
   // Not Found (Tangkap semua route yang tidak dikenal)
   { path: '/:pathMatch(.*)*', name: 'notfound', component: NotFound }
