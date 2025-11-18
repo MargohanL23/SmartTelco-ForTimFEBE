@@ -1,18 +1,18 @@
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-100">
     <div class="w-full max-w-md bg-white shadow-md rounded-xl p-6">
-      <h2 class="text-2xl font-bold text-center mb-6">SmartTelco Login</h2>
+      <h2 class="text-2xl font-bold text-center mb-6">SmartTelco Register</h2>
 
-      <form @submit.prevent="handleLogin" class="space-y-4">
-
-        <!-- Email atau Customer ID -->
+      <form @submit.prevent="handleRegister" class="space-y-4">
+        
+        <!-- Email -->
         <div>
-          <label class="block mb-1 font-medium">Email / Customer ID</label>
+          <label class="block mb-1 font-medium">Email</label>
           <input
-            v-model="identifier"
-            type="text"
+            v-model="email"
+            type="email"
             class="w-full border rounded-lg px-3 py-2"
-            placeholder="example@mail.com / C00001"
+            placeholder="example@mail.com"
             required
           />
         </div>
@@ -24,7 +24,7 @@
             v-model="password"
             type="password"
             class="w-full border rounded-lg px-3 py-2"
-            placeholder="Masukkan password"
+            placeholder="Minimal 6 karakter"
             required
           />
         </div>
@@ -34,22 +34,22 @@
 
         <button
           type="submit"
-          class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
         >
-          Login
+          Register
         </button>
 
         <p class="text-sm text-center">
-          Belum punya akun?
-          <router-link to="/register" class="text-blue-600">Register di sini</router-link>
+          Sudah punya akun?
+          <router-link to="/login" class="text-blue-600">Login di sini</router-link>
         </p>
+
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
 import { apiPost } from "../utils/api";
 import { saveUser } from "../utils/storage";
 import { useRouter } from "vue-router";
@@ -58,33 +58,36 @@ export default {
   setup() {
     const router = useRouter();
 
-    const identifier = ref("");
-    const password = ref("");
-    const errorMsg = ref("");
+    const email = Vue.ref("");
+    const password = Vue.ref("");
+    const errorMsg = Vue.ref("");
 
-    const handleLogin = async () => {
+    const handleRegister = async () => {
       errorMsg.value = "";
 
-      const data = {
-        emailOrId: identifier.value,
+      const payload = {
+        email: email.value,
         password: password.value,
       };
 
-      const res = await apiPost("/login", data);
+      const res = await apiPost("/register", payload);
 
       if (res.error) {
         errorMsg.value = res.error;
         return;
       }
 
-      saveUser(res);
+      // Simpan user baru ke localStorage
+      saveUser({
+        customer_id: res.customer_id,
+        email: email.value,
+        role: "User",
+      });
 
-      if (res.role === "Admin") router.push("/admin");
-      else router.push("/home");
+      router.push("/home");
     };
 
-    return { identifier, password, errorMsg, handleLogin };
+    return { email, password, errorMsg, handleRegister };
   },
 };
 </script>
-
