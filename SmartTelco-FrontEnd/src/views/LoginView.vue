@@ -79,7 +79,7 @@ export default {
 
       saveUser(res);
 
-      if (res.role === "Admin") router.push("/admin");
+      if (res.role === "Admin") router.push("/Admin");
       else router.push("/home");
     };
 
