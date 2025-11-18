@@ -265,8 +265,9 @@ def get_model_status():
 
 # --- 5. Jalankan Server ---
 if __name__ == '__main__':
-    # Inisiasi users.json jika belum ada atau kosong
-    if not os.path.exists(USERS_DB_PATH) or not load_users().get('users'):
+    # Cek hanya apakah file SUDAH ADA atau BELUM
+    if not os.path.exists(USERS_DB_PATH):
+        print("[INFO] users.json tidak ditemukan. Membuat baru...")
         save_users({"next_customer_id": 10001, "users": []})
         
     app.run(debug=True, port=5000)

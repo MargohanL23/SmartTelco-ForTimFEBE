@@ -1,6 +1,13 @@
 {
     "next_customer_id": 10005,
     "users": [
+
+        {
+            "customer_id": "C00000",
+            "email": "admin@smarttelco.com",
+            "password": "adminpassword",
+            "role": "Admin"
+        },
         {
             "customer_id": "C10001",
             "email": "gogo@gogo.com",
