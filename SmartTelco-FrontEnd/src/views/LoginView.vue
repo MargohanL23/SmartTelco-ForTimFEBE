@@ -1,53 +1,65 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="w-full max-w-md bg-white shadow-md rounded-xl p-6">
-      <h2 class="text-2xl font-bold text-center mb-6">SmartTelco Login</h2>
-
-      <form @submit.prevent="handleLogin" class="space-y-4">
-
-        <!-- Email atau Customer ID -->
-        <div>
-          <label class="block mb-1 font-medium">Email / Customer ID</label>
-          <input
-            v-model="identifier"
-            type="text"
-            class="w-full border rounded-lg px-3 py-2"
-            placeholder="example@mail.com / C00001"
-            required
+    <div class="min-h-screen flex items-center justify-center" style="background-color: #FFECC8;">
+      <div class="w-full max-w-md rounded-xl shadow-xl p-8" style="background-color: #842A3B22;">
+        
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            class="mx-auto h-12 w-auto"
+            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=rose&shade=500"
+            alt="SmartTelco"
           />
+          <h2 class="mt-8 text-center text-2xl font-bold tracking-tight" style="color:#842A3B;">
+            SmartTelco Login
+          </h2>
         </div>
-
-        <!-- Password -->
-        <div>
-          <label class="block mb-1 font-medium">Password</label>
-          <input
-            v-model="password"
-            type="password"
-            class="w-full border rounded-lg px-3 py-2"
-            placeholder="Masukkan password"
-            required
-          />
+  
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form class="space-y-6" @submit.prevent="handleLogin">
+  
+            <div>
+              <label class="block text-sm font-medium" style="color:#842A3B;">Email / Customer ID</label>
+              <input
+                v-model="identifier"
+                type="text"
+                required
+                class="block w-full rounded-md px-3 py-2 bg-white/60 outline-none text-gray-800 placeholder-gray-500 shadow-sm"
+              />
+            </div>
+  
+            <div>
+              <label class="block text-sm font-medium" style="color:#842A3B;">Password</label>
+              <input
+                v-model="password"
+                type="password"
+                required
+                class="block w-full rounded-md px-3 py-2 bg-white/60 outline-none text-gray-800 placeholder-gray-500 shadow-sm"
+              />
+            </div>
+  
+            <p v-if="errorMsg" class="text-red-700 text-sm text-center">{{ errorMsg }}</p>
+  
+            <button
+              type="submit"
+              class="w-full rounded-md px-3 py-2 text-white font-semibold shadow-md hover:opacity-90"
+              style="background-color:#842A3B;"
+            >
+              Login
+            </button>
+          </form>
+  
+          <p class="mt-10 text-center text-sm" style="color:#842A3B;">
+            Belum punya akun?
+            <router-link to="/register" class="font-semibold hover:underline" style="color:#842A3B;">
+              Register di sini
+            </router-link>
+          </p>
         </div>
-
-        <!-- Error Message -->
-        <p v-if="errorMsg" class="text-red-600 text-sm">{{ errorMsg }}</p>
-
-        <button
-          type="submit"
-          class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-        >
-          Login
-        </button>
-
-        <p class="text-sm text-center">
-          Belum punya akun?
-          <router-link to="/register" class="text-blue-600">Register di sini</router-link>
-        </p>
-      </form>
+  
+      </div>
     </div>
-  </div>
-</template>
-
+  </template>
+  
+  
 <script>
 import { ref } from "vue";
 import { apiPost } from "../utils/api";
