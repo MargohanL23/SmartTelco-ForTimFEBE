@@ -12,19 +12,19 @@
 
       <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-blue-100 relative transform hover:scale-[1.01] transition duration-300">
         
-        <div class="bg-gradient-to-r from-blue-700 to-indigo-800 p-8 text-center relative overflow-hidden">
+        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 p-8 text-center relative overflow-hidden">
           <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
 
           <span class="inline-block bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full mb-4 shadow-sm">
             ⭐ REKOMENDASI EKSKLUSIF
           </span>
           
-          <h1 class="text-3xl md:text-4xl font-bold text-white mb-2 tracking-wide">
+          <h1 class="text-3xl md:text-4xl font-bold text-black mb-2 tracking-wide">
             {{ resultData.offerName }}
           </h1>
           
-          <p class="text-blue-100 text-sm bg-white/10 inline-block px-4 py-1 rounded-lg backdrop-blur-sm">
-            Tingkat Kepercayaan Model: <strong class="text-white">{{ resultData.confidence }}</strong>
+          <p class="text-black-100 text-sm bg-white/10 inline-block px-4 py-1 rounded-lg backdrop-blur-sm">
+            Tingkat Kepercayaan Model: <strong class="text-black">{{ resultData.confidence }}</strong>
           </p>
         </div>
 
