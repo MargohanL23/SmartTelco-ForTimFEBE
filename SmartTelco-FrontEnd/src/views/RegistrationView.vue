@@ -5,7 +5,6 @@
 
       <form @submit.prevent="handleRegister" class="space-y-4">
         
-        <!-- Email -->
         <div>
           <label class="block mb-1 font-medium">Email</label>
           <input
@@ -17,7 +16,6 @@
           />
         </div>
 
-        <!-- Password -->
         <div>
           <label class="block mb-1 font-medium">Password</label>
           <input
@@ -29,7 +27,6 @@
           />
         </div>
 
-        <!-- Error Message -->
         <p v-if="errorMsg" class="text-red-600 text-sm">{{ errorMsg }}</p>
 
         <button
@@ -50,6 +47,9 @@
 </template>
 
 <script>
+// --- PERBAIKAN ---
+// 1. Impor 'ref' dari 'vue'
+import { ref } from "vue"; 
 import { apiPost } from "../utils/api";
 import { saveUser } from "../utils/storage";
 import { useRouter } from "vue-router";
@@ -58,9 +58,11 @@ export default {
   setup() {
     const router = useRouter();
 
-    const email = Vue.ref("");
-    const password = Vue.ref("");
-    const errorMsg = Vue.ref("");
+    // --- PERBAIKAN ---
+    // 2. Gunakan ref() alih-alih Vue.ref()
+    const email = ref("");
+    const password = ref("");
+    const errorMsg = ref("");
 
     const handleRegister = async () => {
       errorMsg.value = "";
@@ -72,16 +74,18 @@ export default {
 
       const res = await apiPost("/register", payload);
 
-      if (res.error) {
-        errorMsg.value = res.error;
+      // --- PERBAIKAN (Improvement) ---
+      // Cek 'res.message' untuk error (sesuai app.py)
+      if (res.message) {
+        errorMsg.value = res.message;
         return;
       }
 
       // Simpan user baru ke localStorage
       saveUser({
         customer_id: res.customer_id,
-        email: email.value,
-        role: "User",
+        email: email.value, // Ambil dari input
+        role: "User", // Role default dari backend
       });
 
       router.push("/home");

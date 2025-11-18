@@ -66,7 +66,7 @@ export default {
       errorMsg.value = "";
 
       const data = {
-        emailOrId: identifier.value,
+        email: identifier.value,
         password: password.value,
       };
 
