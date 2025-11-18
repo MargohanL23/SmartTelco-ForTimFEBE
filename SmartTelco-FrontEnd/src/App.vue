@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gray-50">
     <Header />
     
-    <main class="pt-20 px-4 max-w-6xl mx-auto">
+    <main class="pt-20 px-4 max-w-10xl mx-auto">
       <RouterView />
     </main>
 
