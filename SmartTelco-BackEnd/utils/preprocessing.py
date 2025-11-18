@@ -3,14 +3,10 @@
 import pandas as pd
 import numpy as np
 
-# --- 1. Definisi Konstanta Fitur (DIKOREKSI AGAR 15 FITUR) ---
+# --- 1. Definisi Konstanta Fitur (15 FITUR) ---
 
-# Label Target Offer (Tetap sama)
-TARGET_LABELS = [
-    'Data Booster', 'Device Upgrade Offer', 'General Offer', 
-    'Retention Offer', 'Roaming Pass', 'Streaming Partner Pack', 
-    'Top-up Promo', 'Voice Bundle', 'OFFER TAK DIKENAL'
-]
+# Label Target Offer (Kita tetap pakai yang sudah dimuat dinamis di app.py)
+# TARGET_LABELS tidak lagi digunakan di sini, tapi kita harus menyimpannya sebagai fitur OHE
 
 # 7 Merek Perangkat yang diakui model (6 kolom OHE + 1 Base Brand/Drop)
 ALLOWED_DEVICE_BRANDS = [
@@ -41,7 +37,7 @@ FEATURE_COLS = [
 def preprocess_data(input_data: dict) -> np.ndarray:
     """
     Mengubah input data pelanggan dari frontend menjadi format array NumPy
-    yang siap dimasukkan ke dalam model ML, dengan memastikan 15 fitur.
+    yang siap dimasukkan ke dalam model ML, dengan memastikan 15 fitur OHE dan RAW.
     """
     
     # 1. Konversi dictionary input ke DataFrame satu baris
@@ -75,5 +71,5 @@ def preprocess_data(input_data: dict) -> np.ndarray:
     # 5. Memastikan urutan kolom SAMA PERSIS dengan FEATURE_COLS (KRUSIAL)
     final_features = df[FEATURE_COLS]
     
-    # 6. Konversi ke array numpy dan kembalikan
-    return final_features.values
+    # 6. Konversi ke array numpy dan kembalikan (Pipeline Anda tampaknya menerima array NumPy, bukan DataFrame)
+    return final_features
