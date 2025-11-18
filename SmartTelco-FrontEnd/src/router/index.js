@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-// --- Import Views ---
+// --- User Views ---
 import LoginView from '../views/LoginView.vue';
 import RegistrationView from '../views/RegistrationView.vue';
 import HomeView from '../views/HomeView.vue';
-import HasilView from '../views/HasilView.vue'; // Pastikan file ini ada (sebelumnya ResultView.vue)
-import AdminUserDetailView from '../views/AdminUserDetailView.vue';
+import HasilView from '../views/HasilView.vue';
 
 // Admin Views (Pastikan file ini ada jika belum dibuat, atau komentari dulu)
 import AdminView from '../views/AdminView.vue';
 import NotFound from '../views/NotFound.vue';
+import AdminUserDetailView from '../views/AdminUserDetailView.vue';
 
 const routes = [
   { path: '/', redirect: '/login' },
