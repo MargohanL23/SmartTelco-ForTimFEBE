@@ -3,18 +3,15 @@
 import pandas as pd
 import numpy as np
 
-# --- 1. Definisi Konstanta Fitur (15 FITUR) ---
+# --- 1. Definisi Konstanta Fitur (17 FITUR) ---
 
-# Label Target Offer (Kita tetap pakai yang sudah dimuat dinamis di app.py)
-# TARGET_LABELS tidak lagi digunakan di sini, tapi kita harus menyimpannya sebagai fitur OHE
-
-# 7 Merek Perangkat yang diakui model (6 kolom OHE + 1 Base Brand/Drop)
+# 7 Merek Perangkat yang diakui model 
 ALLOWED_DEVICE_BRANDS = [
     'Apple', 'Huawei', 'Oppo', 'Realme', 'Samsung', 'Vivo', 'Xiaomi' 
 ] 
-# Kita asumsikan 'Apple' adalah base brand yang di-drop, karena ia umum.
 
-# DAFTAR AKHIR FITUR (WAJIB 15 KOLOM) - SAMA PERSIS DENGAN DAFTAR MODEL KAMU!
+
+# DAFTAR AKHIR FITUR (WAJIB 17 KOLOM)
 FEATURE_COLS = [
     'avg_data_usage_gb', 
     'pct_video_usage', 
@@ -24,7 +21,9 @@ FEATURE_COLS = [
     'topup_freq', 
     'travel_score', 
     'complaint_count',
-    'plan_type_Prepaid', 
+    'plan_type_Postpaid',   
+    'plan_type_Prepaid',   
+    'device_brand_Apple',   
     'device_brand_Huawei', 
     'device_brand_Oppo', 
     'device_brand_Realme', 
@@ -34,36 +33,42 @@ FEATURE_COLS = [
 ]
 
 
-def preprocess_data(input_data: dict) -> np.ndarray:
+def preprocess_data(input_data: dict) -> pd.DataFrame:
     """
-    Mengubah input data pelanggan dari frontend menjadi format array NumPy
-    yang siap dimasukkan ke dalam model ML, dengan memastikan 15 fitur OHE dan RAW.
+    Mengubah input data pelanggan dari frontend (dict) menjadi format DataFrame
+    yang siap dimasukkan ke dalam model ML, dengan memastikan 17 fitur OHE dan RAW.
     """
     
     # 1. Konversi dictionary input ke DataFrame satu baris
     df = pd.DataFrame([input_data])
     
     # 2. Penanganan Kategori Device Brand (PENTING!)
-    # Jika inputan dari frontend (misal: 'Nokia' atau 'Lainnya') tidak ada di ALLOWED_DEVICE_BRANDS,
-    # kita paksa kategorinya menjadi 'Apple' (Base Brand yang akan di-drop/dijadikan 0 di semua kolom OHE).
+    # Jika inputan dari frontend tidak ada di ALLOWED_DEVICE_BRANDS, kita paksa kategorinya menjadi 'Lainnya'
+    # Untuk model 17-fitur, kategori yang tidak terdaftar akan menghasilkan kolom brand_Lainnya (yang akan di-drop)
     df['device_brand'] = df['device_brand'].apply(
-        lambda x: x if x in ALLOWED_DEVICE_BRANDS else 'Apple'
+        lambda x: x if x in ALLOWED_DEVICE_BRANDS else 'Lainnya' # <-- Kita tetapkan kategori fallback 'Lainnya'
     )
     
-    # 3. One-Hot Encoding (OHE) dengan drop_first=True
+    # 3. One-Hot Encoding (OHE) 
     
-    # Plan Type (Menghasilkan 1 kolom: plan_type_Prepaid)
-    df_plan = pd.get_dummies(df['plan_type'], prefix='plan_type', drop_first=True)
+    # Plan Type (Menghasilkan 2 kolom: plan_type_Postpaid dan plan_type_Prepaid)
+    df_plan = pd.get_dummies(df['plan_type'], prefix='plan_type', drop_first=False)
     df = pd.concat([df, df_plan], axis=1)
     df.drop('plan_type', axis=1, inplace=True)
     
-    # Device Brand (Menghasilkan 6 kolom, karena 'Apple' di-drop)
-    df_brand = pd.get_dummies(df['device_brand'], prefix='device_brand', drop_first=True)
+    # Device Brand (Menghasilkan 7 kolom, termasuk Apple)
+    df_brand = pd.get_dummies(df['device_brand'], prefix='device_brand', drop_first=False)
     df = pd.concat([df, df_brand], axis=1)
     df.drop('device_brand', axis=1, inplace=True)
     
     
-    # 4. Menambahkan kolom OHE yang hilang (Ini menjamin 15 kolom selalu ada)
+    # 4. Menambahkan kolom OHE yang hilang dan menghapus kolom OHE ekstra
+    
+    # Hapus kolom OHE yang tidak ada di FEATURE_COLS (misal: device_brand_Lainnya)
+    cols_to_drop = [col for col in df.columns if col.startswith(('plan_type_', 'device_brand_')) and col not in FEATURE_COLS]
+    df.drop(columns=cols_to_drop, errors='ignore', inplace=True)
+    
+    # Tambahkan kolom OHE yang hilang (Ini menjamin 17 kolom selalu ada)
     for col in FEATURE_COLS:
         if col not in df.columns:
             df[col] = 0
@@ -71,5 +76,5 @@ def preprocess_data(input_data: dict) -> np.ndarray:
     # 5. Memastikan urutan kolom SAMA PERSIS dengan FEATURE_COLS (KRUSIAL)
     final_features = df[FEATURE_COLS]
     
-    # 6. Konversi ke array numpy dan kembalikan (Pipeline Anda tampaknya menerima array NumPy, bukan DataFrame)
+    # 6. Mengembalikan DataFrame 
     return final_features
