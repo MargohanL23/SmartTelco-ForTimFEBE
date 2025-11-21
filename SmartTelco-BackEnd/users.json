@@ -1,7 +1,6 @@
 {
-    "next_customer_id": 10007,
+    "next_customer_id": 10008,
     "users": [
-
         {
             "customer_id": "C00000",
             "email": "admin@smarttelco.com",
@@ -22,26 +21,32 @@
         },
         {
             "customer_id": "C10003",
-            "email": "contoh@gmail.com",
-            "password": "contoh123",
+            "email": "varel@varel.com",
+            "password": "varel1234",
             "role": "User"
         },
         {
             "customer_id": "C10004",
-            "email": "contoh1@gmail.com",
-            "password": "contoh321",
+            "email": "pret@pret.com",
+            "password": "pret1234",
             "role": "User"
         },
         {
             "customer_id": "C10005",
-            "email": "coba@gmail.com",
-            "password": "coba@123",
+            "email": "icak@gmail.com",
+            "password": "hoerunnisa15",
             "role": "User"
         },
         {
             "customer_id": "C10006",
-            "email": "coba1@gmail.com",
-            "password": "coba@123",
+            "email": "dimas@dimas.com",
+            "password": "dimas123",
+            "role": "User"
+        },
+        {
+            "customer_id": "C10007",
+            "email": "gaga@gaga.com",
+            "password": "gaga1234",
             "role": "User"
         }
     ]
