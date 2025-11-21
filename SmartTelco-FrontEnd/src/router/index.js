@@ -7,6 +7,7 @@ import HomeView from '../views/HomeView.vue';
 import HasilView from '../views/HasilView.vue';
 // TAMBAHAN: Import halaman SimulationView
 import SimulationView from '../views/SimulationView.vue';
+import AboutUsView from '../views/AboutUsView.vue';
 
 // Admin Views
 import AdminView from '../views/AdminView.vue';
@@ -29,6 +30,7 @@ const routes = [
   // Admin Area
   { path: '/admin', component: AdminView },
   { path: '/admin/user/:id', component: AdminUserDetailView },
+  { path: '/about', component: AboutUsView },
 
   // Not Found
   { path: '/:pathMatch(.*)*', name: 'notfound', component: NotFound }
