@@ -4,10 +4,10 @@
     <div class="relative h-[500px] flex items-center justify-center overflow-hidden">
       <div class="absolute inset-0 z-0">
         <img 
-          src="C:\new data\jar file\ASAH DECODING\CAPSTONE\Repo Gohan\SmartTelco-ForTimFEBE\SmartTelco-FrontEnd\src\images\foto atmin.jpg" 
-          alt="About Us Hero" 
-          class="w-full h-full object-cover brightness-50"
-        />
+      src="/images/foto atmin.jpg" 
+      alt="About Us Hero" 
+      class="w-full h-full object-cover brightness-50"
+    />
       </div>
       
       <div class="relative z-10 text-center">
@@ -117,27 +117,27 @@ import { ref } from 'vue';
 const teamMembers = ref([
   {
     name: "Margohan L. Siringo Ringo ",
-    role: "CEO & Founder",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop"
+    role: "Back-End Developer",
+    image: "/images/Foto gohan.jpg"
   },
   {
     name: "Muhammad Izhar Fadillah",
-    role: "Lead Data Scientist",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop"
+    role: "Front-End Developer",
+    image: "/images/Foto izhar.jpg"
   },
   {
-    name: "M.Varrel Nuwi",
-    role: "Senior Developer",
+    name: "M. Varrel Nuwi Zulyanno",
+    role: "Front-End Developer",
     image: "/images/varrelnuwi.jpg"
   },
   {
-    name: "Jessica Doe",
-    role: "UI/UX Designer",
+    name: "Hoerunisa",
+    role: "Machine Learning Engineer",
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop"
   },
   {
-    name: "David Smith",
-    role: "Marketing Head",
+    name: " Moch. Faisal Syahwaludin",
+    role: "Machine Learning Engineer",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1887&auto=format&fit=crop"
   }
 ]);
