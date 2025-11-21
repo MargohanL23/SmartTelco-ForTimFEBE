@@ -30,7 +30,7 @@
 
         <div class="p-6 md:p-8">
           <h3 class="text-lg font-bold text-gray-800 mb-2">Mengapa Penawaran Ini?</h3>
-          <p class="text-gray-600 leading-relaxed mb-6" v-html="resultData.reason"></p>
+          <p class="text-justify text-gray-600 leading-relaxed mb-6" v-html="resultData.reason"></p>
 
           <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
             <div v-for="(fact, index) in resultData.facts" :key="index" class="flex flex-col items-center p-3 bg-blue-50 rounded-lg border border-blue-100 text-center">
@@ -190,28 +190,51 @@ function generateReason(offer, data) {
   
   switch (offer) {
     case 'Data Booster':
-      reason += `Anda adalah pengguna data yang sangat aktif (Rata-rata <strong>${data.avg_data_usage_gb} GB</strong>). Paket ini dirancang untuk memastikan Anda tidak kehabisan kuota.`;
+      reason += `Anda adalah pengguna data yang sangat aktif (Rata-rata <strong>${data.avg_data_usage_gb} GB</strong>). Smart Telco merekomendasikan Data Booster karena penggunaan data dan aktivitas video Anda terlihat cukup tinggi. Pola ini menunjukkan bahwa Anda sering menggunakan internet untuk streaming, browsing, atau aplikasi dengan konsumsi data besar. Pengeluaran bulanan yang juga tinggi semakin menunjukkan bahwa kebutuhan internet Anda cukup intens. Dengan fitur lain seperti telepon, SMS, dan aktivitas perjalanan yang masih dalam batas wajar, paket Data Booster menjadi pilihan terbaik untuk memastikan Anda memiliki kuota yang cukup untuk mendukung aktivitas harian Anda.
+
+`;
       break;
     case 'Streaming Partner Pack':
       // Hitung persen jika data dalam desimal (0.5) atau integer (50)
       const videoPct = data.pct_video_usage > 1 ? data.pct_video_usage : (data.pct_video_usage * 100);
-      reason += `Dengan persentase penggunaan video mencapai <strong>${videoPct}%</strong>, paket ini memberikan kuota khusus streaming favorit Anda.`;
+      reason += `Dengan persentase penggunaan video mencapai <strong>${videoPct}%</strong>, Smart Telco merekomendasikan Streaming Partner Pack karena aktivitas video Anda terlihat paling menonjol dibanding fitur lainnya. Penggunaan data Anda juga tidak terlalu besar, sementara layanan seperti telepon, SMS, atau top-up jarang digunakan. Dengan pola penggunaan seperti ini, paket streaming adalah pilihan yang paling tepat untuk mendukung kebiasaan Anda dalam menikmati berbagai konten video.
+
+`;
       break;
     case 'Voice Bundle':
-      reason += `Rata-rata durasi panggilan Anda adalah <strong>${data.avg_call_duration} menit</strong>. Paket ini menawarkan tarif telepon hemat.`;
+      reason += `Rata-rata durasi panggilan Anda adalah <strong>${data.avg_call_duration} menit</strong>. Smart Telco merekomendasikan Voice Bundle karena aktivitas telepon Anda terlihat cukup tinggi dibandingkan fitur lainnya. Dengan layanan pascabayar dan penggunaan data serta video yang masih tergolong rendah, pola ini menunjukkan bahwa Anda lebih banyak berkomunikasi lewat panggilan. Pengeluaran bulanan Anda juga stabil, sehingga paket berbasis panggilan seperti ini menjadi pilihan yang paling pas untuk mendukung kebutuhan Anda sehari-hari.
+
+`;
       break;
     case 'Roaming Pass':
-      reason += `Skor perjalanan Anda (<strong>${Number(data.travel_score).toFixed(2)}</strong>) mengindikasikan mobilitas tinggi. Roaming Pass menjamin konektivitas di luar negeri.`;
+      reason += `Skor perjalanan Anda (<strong>${Number(data.travel_score).toFixed(2)}</strong>) Smart Telco merekomendasikan Roaming Pass karena travel score Anda menunjukkan bahwa Anda cukup sering bepergian ke luar negeri. Penggunaan fitur lain seperti data, telepon, SMS, atau video masih dalam batas wajar dan tidak terlalu dominan. Dengan pola perjalanan seperti ini, paket roaming menjadi pilihan yang paling tepat agar Anda tetap nyaman dan terhubung selama berada di luar negeri.
+
+`;
       break;
     case 'Retention Offer':
-      reason += `Mengingat riwayat keluhan (<strong>${data.complaint_count}x</strong>) atau pengeluaran saat ini (Rp ${spend}.000), ini adalah penawaran spesial untuk Anda.`;
+      reason += `Mengingat riwayat keluhan (<strong>${data.complaint_count}x</strong>) atau pengeluaran saat ini (Rp ${spend}.000), Smart Telco merekomendasikan Retention Offer karena melihat Anda mengalami beberapa kendala dalam penggunaan layanan, dengan jumlah keluhan yang sudah cukup banyak. Aktivitas Anda pun cukup beragam, seperti menggunakan beberapa jenis paket, pengeluaran bulanan yang lumayan, serta penggunaan video yang tergolong sedang namun sering terganggu. Berdasarkan pola ini, penawaran khusus ini diberikan agar Anda bisa mendapatkan pengalaman yang lebih nyaman dan sesuai kebutuhan Anda.
+
+`;
       break;
     case 'Top-up Promo':
-      reason += `Dengan frekuensi top-up <strong>${data.topup_freq}x</strong> per bulan, promo ini memberikan nilai tambah setiap kali isi ulang.`;
+      reason += `Dengan frekuensi top-up <strong>${data.topup_freq}x</strong> per bulan, Smart Telco merekomendasikan Top Up Promo karena pola penggunaan Anda menunjukkan bahwa Anda tidak terlalu aktif menggunakan layanan seperti data, video, atau telepon. Sebaliknya, Anda lebih sering melakukan isi ulang saldo dibandingkan fitur lainnya. Dengan kebiasaan seperti ini, promo top-up menjadi pilihan yang paling pas untuk membantu Anda mendapatkan nilai yang lebih hemat dan optimal setiap kali melakukan pengisian.
+
+`;
       break;
     case 'General Offer':
-      reason += `Pola penggunaan Anda seimbang. Ini adalah paket serbaguna dengan nilai terbaik untuk harian.`;
+      reason += `Smart Telco merekomendasikan General Offer karena pola penggunaan Anda terlihat cukup stabil dan tidak terlalu tinggi di berbagai fitur. Aktivitas seperti data, video, telepon, maupun top-up berada pada tingkat yang wajar, dan Anda juga tidak mengalami banyak keluhan dalam layanan. Dengan kebutuhan yang sederhana dan tidak terlalu spesifik seperti ini, General Offer menjadi pilihan terbaik untuk mendukung penggunaan harian Anda secara praktis dan efisien.
+
+`;
       break;
+
+    case 'Device Upgrade Offer':
+      reason += `Smart Telco merekomendasikan Device Upgrade Offer karena pola penggunaan Anda terlihat cukup intens. Anda menggunakan data dalam jumlah besar (<strong>${data.avg_data_usage_gb} GB</strong>), melakukan panggilan dengan durasi yang cukup tinggi, serta memiliki pengeluaran bulanan yang tergolong besar (Rp ${spend}.000). Selain itu, perangkat yang Anda gunakan tampaknya sudah bukan model terbaru, sehingga mungkin kurang optimal untuk mendukung aktivitas digital Anda yang cukup aktif. Berdasarkan pola tersebut, penawaran upgrade perangkat diberikan agar Anda dapat menikmati pengalaman penggunaan yang lebih lancar, nyaman, dan maksimal.`;
+      break;
+
+    case 'Family Plan Offer':
+      reason += `Smart Telco merekomendasikan Family Plan Offer karena Anda menggunakan layanan pascabayar dan pola penggunaan Anda menunjukkan kebutuhan yang biasanya muncul ketika satu akun digunakan oleh beberapa orang. Jika aktivitas Anda termasuk tinggi seperti penggunaan data yang besar, pengeluaran bulanan yang cukup tinggi, serta panggilan yang sering maka paket keluarga membantu membagi kebutuhan tersebut agar lebih efisien dan hemat. Namun, jika penggunaan data dan panggilan Anda lebih rendah tetapi aktivitas video dan SMS tergolong tinggi, pola ini tetap menunjukkan variasi kebutuhan di dalam satu akun. Dengan karakteristik tersebut, paket keluarga menjadi pilihan yang tepat karena memberikan fleksibilitas bagi berbagai jenis penggunaan dalam satu layanan.`;
+      break;
+
     default:
       reason += "Rekomendasi ini sangat cocok dengan pola penggunaan Anda secara keseluruhan.";
   }
