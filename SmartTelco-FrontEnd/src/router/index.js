@@ -5,11 +5,13 @@ import LoginView from '../views/LoginView.vue';
 import RegistrationView from '../views/RegistrationView.vue';
 import HomeView from '../views/HomeView.vue';
 import HasilView from '../views/HasilView.vue';
+// TAMBAHAN: Import halaman SimulationView
+import SimulationView from '../views/SimulationView.vue';
 
-// Admin Views (Pastikan file ini ada jika belum dibuat, atau komentari dulu)
+// Admin Views
 import AdminView from '../views/AdminView.vue';
-import NotFound from '../views/NotFound.vue';
 import AdminUserDetailView from '../views/AdminUserDetailView.vue';
+import NotFound from '../views/NotFound.vue';
 
 const routes = [
   { path: '/', redirect: '/login' },
@@ -20,13 +22,15 @@ const routes = [
 
   // User Area
   { path: '/home', component: HomeView },
-  { path: '/hasil', component: HasilView }, // Halaman hasil rekomendasi
+  { path: '/hasil', component: HasilView },
+  // TAMBAHAN: Route untuk halaman simulasi
+  { path: '/simulation', component: SimulationView },
 
   // Admin Area
   { path: '/admin', component: AdminView },
   { path: '/admin/user/:id', component: AdminUserDetailView },
 
-  // Not Found (Tangkap semua route yang tidak dikenal)
+  // Not Found
   { path: '/:pathMatch(.*)*', name: 'notfound', component: NotFound }
 ];
 
@@ -39,37 +43,31 @@ const router = createRouter({
    ROUTER GUARD (Proteksi Halaman)
 ──────────────────────────────────────────────── */
 router.beforeEach((to, from, next) => {
-  // Ambil user dari localStorage
   const userString = localStorage.getItem('user');
   const user = userString ? JSON.parse(userString) : null;
 
-  // Daftar halaman yang perlu login
-  const protectedUserRoutes = ['/home', '/hasil'];
+  // TAMBAHAN: Masukkan '/simulation' ke dalam protected routes
+  const protectedUserRoutes = ['/home', '/hasil', '/simulation'];
   
-  // Cek apakah user mau ke halaman admin
   const isAdminRoute = to.path.startsWith('/admin');
-  
-  // Cek apakah user mau ke halaman user biasa
   const isUserRoute = protectedUserRoutes.includes(to.path);
 
-  // 1. Jika belum login, tapi mencoba masuk ke halaman terlindungi
+  // 1. Belum login
   if (!user && (isUserRoute || isAdminRoute)) {
     return next('/login');
   }
 
-  // 2. Jika sudah login sebagai 'User' biasa, tapi mencoba masuk Admin
+  // 2. User biasa mencoba masuk Admin
   if (user && user.role !== 'Admin' && isAdminRoute) {
-    // Tendang balik ke home
     return next('/home');
   }
 
-  // 3. (Opsional) Jika sudah login, jangan biarkan akses halaman login/register lagi
+  // 3. Sudah login, cegah akses login/register
   if (user && (to.path === '/login' || to.path === '/register')) {
     if (user.role === 'Admin') return next('/admin');
     return next('/home');
   }
 
-  // Lanjut ke halaman tujuan
   next();
 });
 

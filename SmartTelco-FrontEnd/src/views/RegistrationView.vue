@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center" style="background-color: #FFECC8;">
-    <div class="w-full max-w-md rounded-xl shadow-xl p-8" style="background-color: #842A3B22;">
+      <div class="min-h-screen flex items-center justify-center" >
+      <div class="w-full max-w-md rounded-xl shadow-xl p-8 bg-white/60 backdrop-blur-md border border-white/20">
 
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
