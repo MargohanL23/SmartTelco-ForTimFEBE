@@ -24,6 +24,13 @@
           >
             Simulation
           </RouterLink>
+
+          <RouterLink
+            to="/about"
+            class="hover:text-white hover:bg-[#842A3B] px-3 py-1 rounded transition"
+          >
+            About Us
+          </RouterLink>
   
           <!-- Jika BELUM login -->
           <template v-if="!isLoggedIn">
