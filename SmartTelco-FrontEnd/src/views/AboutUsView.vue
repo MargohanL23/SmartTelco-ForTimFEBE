@@ -128,7 +128,7 @@ const teamMembers = ref([
   {
     name: "M.Varrel Nuwi",
     role: "Senior Developer",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
+    image: "/images/varrelnuwi.jpg"
   },
   {
     name: "Jessica Doe",
