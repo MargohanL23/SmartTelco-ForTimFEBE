@@ -1,185 +1,190 @@
 <template>
-  <div class="space-y-6 pb-10">
-
-    <h2 class="text-3xl font-bold text-gray-100 text-center">INPUT DATA REKOMENDASI</h2>
-
-    <div class="bg-white shadow-2xl shadow-white/10 p-8 rounded-2xl grid gap-6 ring-1 ring-black/5 max-w-4xl mx-auto relative z-10">
-
-      <div>
-        <label class="block mb-2 font-medium text-gray-700">Jenis Paket:</label>
-        <select v-model="form.jenisPaket" class="border border-gray-300 p-2.5 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-          <option value="Prepaid">Prepaid (Prabayar)</option>
-          <option value="Postpaid">Postpaid (Pascabayar)</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="block mb-2 font-medium text-gray-700">Merek Perangkat:</label>
-        
-        <div class="flex overflow-x-auto pb-2 gap-3 scrollbar-hide snap-x">
-          <div 
-            v-for="brand in brandList" 
-            :key="brand"
-            @click="form.merek = brand"
-            :class="[
-              'flex-shrink-0 px-5 py-2.5 rounded-lg border cursor-pointer transition-all duration-200 snap-start text-sm font-medium',
-              form.merek === brand 
-                ? 'border-blue-600 bg-gradient-to-br from-red-900 to-gray-700 text-white shadow-md transform scale-105' 
-                : 'border-gray-300 bg-white text-gray-600 hover:bg-gray-50 hover:border-blue-400'
-            ]"
-          >
-            {{ brand }}
-          </div>
-        </div>
-        <p class="text-xs text-gray-500 mt-1">Terpilih: <span class="font-bold text-red-600">{{ form.merek }}</span></p>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-medium text-gray-700">Penggunaan Data (GB)</label>
-        <div class="flex items-center gap-4">
-          <input 
-            type="range" min="1" max="50" 
-            v-model.number="form.dataUsage" 
-            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-800"
-          />
-          <input 
-            type="number" min="1" max="50"
-            v-model.number="form.dataUsage"
-            class="w-28 p-2 border rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-medium text-gray-700">Pengeluaran Bulanan (RP Ribu)</label>
-        <div class="flex items-center gap-4">
-          <input 
-            type="range" min="10" max="5000" 
-            v-model.number="form.pengeluaran" 
-            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-800"
-          />
-          <div class="relative">
-            
-            <input 
-              type="number" min="10" max="1000"
-              v-model.number="form.pengeluaran"
-              class="w-28 p-2 pl-8 border rounded-lg font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-            <span class="absolute right-8 top-2.5 text-gray-500 text-sm">rb</span>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-medium text-gray-700">% Streaming Video</label>
-        <div class="flex items-center gap-4">
-          <input 
-            type="range" min="0" max="100" 
-            v-model.number="form.videoUsage" 
-            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-800"
-          />
-          <div class="relative">
-            <input 
-              type="number" min="0" max="100"
-              v-model.number="form.videoUsage"
-              class="w-28 p-2 border rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-            <span class="absolute right-9 top-3 text-gray-500 text-sm">%</span>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-medium text-gray-700">Durasi Panggilan (Menit)</label>
-        <div class="flex items-center gap-4">
-          <input 
-            type="range" min="0" max="300" step="0.5"
-            v-model.number="form.durasiPanggilan" 
-            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-800"
-          />
-          <input 
-            type="number" min="0" max="300"
-            v-model.number="form.durasiPanggilan"
-            class="w-28 p-2 border rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-medium text-gray-700">Frekuensi SMS (Bulan)</label>
-        <div class="flex items-center gap-4">
-          <input 
-            type="range" min="0" max="200" 
-            v-model.number="form.sms" 
-            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-800"
-          />
-          <input 
-            type="number" min="0" max="200"
-            v-model.number="form.sms"
-            class="w-28 p-2 border rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-medium text-gray-700">Frekuensi Top-up (Bulan)</label>
-        <div class="flex items-center gap-4">
-          <input 
-            type="range" min="0" max="20" 
-            v-model.number="form.topup" 
-            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-800"
-          />
-          <input 
-            type="number" min="0" max="20"
-            v-model.number="form.topup"
-            class="w-28 p-2 border rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-medium text-gray-700">Travel Score (0.0 - 1.0)</label>
-        <div class="flex items-center gap-4">
-          <input 
-            type="range" min="0" max="1" step="0.01" 
-            v-model.number="form.travel" 
-            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-800"
-          />
-          <input 
-            type="number" min="0" max="1" step="0.01"
-            v-model.number="form.travel"
-            class="w-28 p-2 border rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-        </div>
-        <p class="text-xs text-gray-400 mt-1">0.0 (Jarang Travel) - 1.0 (Sering Travel)</p>
-      </div>
-
-      <div>
-        <label class="block mb-2 font-medium text-gray-700">Jumlah Keluhan (Customer Service):</label>
-        <input 
-          type="number" 
-          min="0"
-          class="border border-gray-300 p-2.5 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" 
-          v-model.number="form.keluhan" 
-        />
-      </div>
-
-      <button 
-        @click="getRekomendasi"
-        :disabled="isLoading"
-        class="w-full bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-500 hover:to-blue-800 text-white font-bold py-3 rounded-lg shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 mt-4 disabled:opacity-50 disabled:cursor-not-allowed">
-        <span v-if="isLoading">Memproses...</span>
-        <span v-else>DAPATKAN REKOMENDASI TERBAIK</span>
-      </button>
+  <div class="min-h-screen w-full overflow-x-hidden bg-gray-900/5 pb-10">
+    
+    <div class="container mx-auto px-4 md:px-0">
       
-    </div>
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-100 text-center py-6 break-words">
+        INPUT DATA REKOMENDASI
+      </h2>
 
+      <div class="w-full max-w-3xl mx-auto bg-white shadow-2xl shadow-black/20 p-5 md:p-8 rounded-2xl flex flex-col gap-6 relative z-10">
+
+        <div class="w-full">
+          <label class="block mb-2 font-medium text-gray-700 text-sm md:text-base">Jenis Paket:</label>
+          <select v-model="form.jenisPaket" class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-gray-900">
+            <option value="Prepaid">Prepaid (Prabayar)</option>
+            <option value="Postpaid">Postpaid (Pascabayar)</option>
+          </select>
+        </div>
+
+        <div class="w-full min-w-0">
+          <label class="block mb-2 font-medium text-gray-700 text-sm md:text-base">Merek Perangkat:</label>
+          <div class="w-full overflow-hidden"> 
+            <div class="flex overflow-x-auto pb-4 gap-3 scrollbar-hide snap-x">
+              <div 
+                v-for="brand in brandList" 
+                :key="brand"
+                @click="form.merek = brand"
+                :class="[
+                  'flex-shrink-0 px-4 py-2 rounded-lg border cursor-pointer transition-all duration-200 text-sm font-medium select-none',
+                  form.merek === brand 
+                    ? 'border-blue-600 bg-gradient-to-br from-red-900 to-gray-700 text-white shadow-md' 
+                    : 'border-gray-300 bg-white text-gray-600 hover:bg-gray-50'
+                ]"
+              >
+                {{ brand }}
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">Terpilih: <span class="font-bold text-red-600">{{ form.merek }}</span></p>
+        </div>
+
+        <div class="w-full">
+          <label class="block mb-2 font-medium text-gray-700 text-sm md:text-base">Penggunaan Data (GB)</label>
+          <div class="flex flex-col md:flex-row gap-3 md:items-center">
+            <input 
+              type="range" min="1" max="50" 
+              v-model.number="form.dataUsage" 
+              class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer accent-red-800"
+            />
+            <input 
+              type="number" min="1" max="50"
+              v-model.number="form.dataUsage"
+              class="w-full md:w-24 p-2 border border-gray-300 rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label class="block mb-2 font-medium text-gray-700 text-sm md:text-base">Pengeluaran Bulanan (RP Ribu)</label>
+          <div class="flex flex-col md:flex-row gap-3 md:items-center">
+            <input 
+              type="range" min="10" max="5000" 
+              v-model.number="form.pengeluaran" 
+              class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer accent-red-800"
+            />
+            <div class="relative w-full md:w-36 shrink-0">
+              <input 
+                type="number" min="10" max="1000"
+                v-model.number="form.pengeluaran"
+                class="w-full p-2 pl-10 border border-gray-300 rounded-lg font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+              <span class="absolute left-3 top-2.5 text-gray-500 text-sm font-bold">Rp</span>
+              <span class="absolute right-3 top-2.5 text-gray-500 text-sm">rb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label class="block mb-2 font-medium text-gray-700 text-sm md:text-base">% Streaming Video</label>
+          <div class="flex flex-col md:flex-row gap-3 md:items-center">
+            <input 
+              type="range" min="0" max="100" 
+              v-model.number="form.videoUsage" 
+              class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer accent-red-800"
+            />
+            <div class="relative w-full md:w-24 shrink-0">
+              <input 
+                type="number" min="0" max="100"
+                v-model.number="form.videoUsage"
+                class="w-full p-2 border border-gray-300 rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+              <span class="absolute right-8 md:right-6 top-2.5 text-gray-500 text-sm">%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label class="block mb-2 font-medium text-gray-700 text-sm md:text-base">Durasi Panggilan (Menit)</label>
+          <div class="flex flex-col md:flex-row gap-3 md:items-center">
+            <input 
+              type="range" min="0" max="300" step="0.5"
+              v-model.number="form.durasiPanggilan" 
+              class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer accent-red-800"
+            />
+            <input 
+              type="number" min="0" max="300"
+              v-model.number="form.durasiPanggilan"
+              class="w-full md:w-24 p-2 border border-gray-300 rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label class="block mb-2 font-medium text-gray-700 text-sm md:text-base">Frekuensi SMS (Bulan)</label>
+          <div class="flex flex-col md:flex-row gap-3 md:items-center">
+            <input 
+              type="range" min="0" max="200" 
+              v-model.number="form.sms" 
+              class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer accent-red-800"
+            />
+            <input 
+              type="number" min="0" max="200"
+              v-model.number="form.sms"
+              class="w-full md:w-24 p-2 border border-gray-300 rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label class="block mb-2 font-medium text-gray-700 text-sm md:text-base">Frekuensi Top-up (Bulan)</label>
+          <div class="flex flex-col md:flex-row gap-3 md:items-center">
+            <input 
+              type="range" min="0" max="20" 
+              v-model.number="form.topup" 
+              class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer accent-red-800"
+            />
+            <input 
+              type="number" min="0" max="20"
+              v-model.number="form.topup"
+              class="w-full md:w-24 p-2 border border-gray-300 rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label class="block mb-2 font-medium text-gray-700 text-sm md:text-base">Travel Score</label>
+          <div class="flex flex-col md:flex-row gap-3 md:items-center">
+            <input 
+              type="range" min="0" max="1" step="0.01" 
+              v-model.number="form.travel" 
+              class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer accent-red-800"
+            />
+            <input 
+              type="number" min="0" max="1" step="0.01"
+              v-model.number="form.travel"
+              class="w-full md:w-24 p-2 border border-gray-300 rounded-lg text-center font-bold text-blue-600 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+          <p class="text-xs text-gray-400 mt-1">0.0 (Jarang) - 1.0 (Sering)</p>
+        </div>
+
+        <div class="w-full">
+          <label class="block mb-2 font-medium text-gray-700 text-sm md:text-base">Jumlah Keluhan (CS):</label>
+          <input 
+            type="number" min="0"
+            class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" 
+            v-model.number="form.keluhan" 
+          />
+        </div>
+
+        <button 
+          @click="getRekomendasi"
+          :disabled="isLoading"
+          class="w-full bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-500 hover:to-blue-800 text-white font-bold py-3 md:py-4 rounded-xl shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 mt-4 disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-lg">
+          <span v-if="isLoading">Memproses...</span>
+          <span v-else>DAPATKAN REKOMENDASI</span>
+        </button>
+        
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+// Pastikan import ini sesuai dengan struktur folder Anda
 import { apiPost } from "../utils/api"; 
 
 const router = useRouter();
@@ -244,11 +249,13 @@ async function getRekomendasi() {
 </script>
 
 <style scoped>
+/* Hide scrollbar for Chrome, Safari and Opera */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
+/* Hide scrollbar for IE, Edge and Firefox */
 .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 </style>

@@ -55,34 +55,40 @@
         Nilai Bisnis & Inovasi
       </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-8xl min-h-[350px] relative z-10 text-justify">
         <div
           class="bg-white text-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-          <div class="text-4xl mb-4">🎯</div>
-          <h3 class="text-[#003366] font-bold text-lg mb-3">Presisi Tinggi</h3>
+          <div class="text-6xl mb-4 items-center text-center">🎯</div>
+          <h3 class="text-[#003366] font-bold text-2xl mb-4 items-center text-center">Presisi Tinggi</h3>
           <p class="text-sm text-gray-600 leading-relaxed">
-            Model dilatih dengan data perilaku historis (penggunaan data, biaya, panggilan) untuk memprediksi penawaran
+            Menggunakan algoritma Machine Learning mutakhir yang dilatih dengan dataset masif perilaku historis pelanggan. 
+            Sistem menganalisis variabel kompleks seperti pola penggunaan data, riwayat transaksi, dan durasi panggilan secara real-time untuk menghasilkan prediksi 
+            <strong>Target Offer</strong> dengan tingkat akurasi tertinggi, memastikan setiap rekomendasi benar-benar relevan dengan kebutuhan spesifik pelanggan saat ini.
+
             <strong>Target Offer</strong> paling optimal.
           </p>
         </div>
 
         <div
           class="bg-white text-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-          <div class="text-4xl mb-4">💰</div>
-          <h3 class="text-[#003366] font-bold text-lg mb-3">Peningkatan Revenue</h3>
+          <div class="text-6xl mb-4 items-center text-center">💰</div>
+          <h3 class="text-[#003366] font-bold text-2xl mb-4 items-center text-center">Peningkatan Revenue</h3>
           <p class="text-sm text-gray-600 leading-relaxed">
-            Dengan rekomendasi yang sangat relevan, tingkat konversi pembelian (acceptance rate) paket dapat meningkat
-            signifikan.
+            Mentransformasi strategi penjualan dari <em>"Mass Marketing"</em> menjadi pendekatan presisi yang berdampak langsung pada <em>Bottom Line</em>. 
+            Dengan mengidentifikasi peluang <em>Up-selling</em> dan <em>Cross-selling</em> yang paling relevan bagi setiap individu, sistem ini secara efektif meningkatkan
+             <strong>Average Revenue Per User (ARPU)</strong> sekaligus menekan biaya pemasaran yang terbuang (<em>Marketing Waste</em>), memastikan setiap promosi menghasilkan ROI
+              (<em>Return on Investment</em>) yang maksimal.
           </p>
         </div>
 
         <div
           class="bg-white text-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-          <div class="text-4xl mb-4">📊</div>
-          <h3 class="text-[#003366] font-bold text-lg mb-3">Segmentasi Dinamis</h3>
+          <div class="text-6xl mb-4 items-center text-center">📊</div>
+          <h3 class="text-[#003366] font-bold text-2xl mb-4 items-center text-center">Segmentasi Dinamis</h3>
           <p class="text-sm text-gray-600 leading-relaxed">
-            Mampu mengidentifikasi segmen pelanggan seperti 'Heavy Video Users', 'Frequent Travelers', dan 'Budget
-            Communicators' secara otomatis.
+            Meninggalkan metode segmentasi statis tradisional demi pengelompokan otomatis berbasis AI yang granular. Sistem mampu mendeteksi 
+            perubahan perilaku pelanggan secara instan dan mengkategorikan mereka ke dalam mikro-segmen spesifik seperti <em>'High-Bandwidth 
+              Streamers'</em>, <em>'Roaming Travelers'</em>, atau <em>'Price-Sensitive Users'</em>, memungkinkan eksekusi kampanye pemasaran yang adaptif dan kontekstual.
           </p>
         </div>
       </div>
