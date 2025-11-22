@@ -36,17 +36,10 @@
         <div class="relative group cursor-pointer">
           <div class="overflow-hidden rounded-lg shadow-2xl transform transition duration-500 hover:scale-[1.01]">
             <img 
-              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop" 
+              src="/images/our_mission.jpg" 
               alt="What We Do" 
               class="w-full h-[400px] object-cover"
             />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition duration-300 flex items-center justify-center">
-              <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#842A3B] ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                </svg>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -92,8 +85,23 @@
                 class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
               />
               <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-[#842A3B]/90 to-transparent translate-y-full group-hover:translate-y-0 transition duration-300 flex justify-center gap-4">
-                <a href="#" class="text-white hover:text-[#FFC107]"><i class="fab fa-linkedin"></i> LINK</a>
-                <a href="#" class="text-white hover:text-[#FFC107]"><i class="fab fa-instagram"></i> IG</a>
+                <a 
+                  :href="member.linkedin"
+                  target="_blank"
+                  class="text-white hover:text-[#FFC107] flex items-center gap-1"
+                >
+                  <i class="fab fa-linkedin"></i>
+                  LinkedIn
+                </a>
+
+                <a 
+                  :href="member.instagram"
+                  target="_blank"
+                  class="text-white hover:text-[#FFC107] flex items-center gap-1"
+                >
+                  <i class="fab fa-instagram"></i>
+                  IG
+                </a>
               </div>
             </div>
             
@@ -116,29 +124,39 @@ import { ref } from 'vue';
 // Menggunakan gambar placeholder (Unsplash/UI Faces)
 const teamMembers = ref([
   {
-    name: "Margohan L. Siringo Ringo ",
+    name: "Margohan L. Siringo Ringo",
     role: "Back-End Developer",
-    image: "/images/Foto gohan.jpg"
+    image: "/images/foto_gohan.jpg",
+    instagram: "https://www.instagram.com/gohanl_srn",
+    linkedin: "http://www.linkedin.com/in/margohanlsiringo"
   },
   {
     name: "Muhammad Izhar Fadillah",
     role: "Front-End Developer",
-    image: "/images/Foto izhar.jpg"
+    image: "/images/Foto izhar.jpg",
+    instagram: "https://www.instagram.com/izhr_fdlh",
+    linkedin: "https://id.linkedin.com/in/muhammad-izhar-fadillah-3a8971347"
   },
   {
     name: "M. Varrel Nuwi Zulyanno",
     role: "Front-End Developer",
-    image: "/images/varrelnuwi.jpg"
+    image: "/images/varrelnuwi.jpg",
+    instagram: "https://www.instagram.com/varrelnwz_",
+    linkedin: "https://www.linkedin.com/in/muhammad-varrel-nuwi-zulyanno"
   },
   {
     name: "Hoerunisa",
     role: "Machine Learning Engineer",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop"
+    image: "/images/foto_ica.jpg",
+    instagram: "https://instagram.com/hoerunisa",
+    linkedin: "https://linkedin.com/in/hoerunisa"
   },
   {
-    name: " Moch. Faisal Syahwaludin",
+    name: "Moch. Faisal Syahwaludin",
     role: "Machine Learning Engineer",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1887&auto=format&fit=crop"
+    image: "/images/foto_faisal.jpg",
+    instagram: "https://www.instagram.com/mfaisal.sy?igsh=MzNlemMxcXdjbm8w&utm_source=qr",
+    linkedin: "https://www.linkedin.com/in/mochfaisalsyahwaludin"
   }
 ]);
 </script>
