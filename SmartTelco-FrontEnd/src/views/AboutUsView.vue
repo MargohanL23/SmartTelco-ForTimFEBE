@@ -46,15 +46,15 @@
         <div class="space-y-6">
           <h4 class="text-[#FFC107] font-bold tracking-wider uppercase text-sm">Our Mission</h4>
           <h2 class="text-4xl font-bold text-[#842A3B] leading-tight">
-            WHAT WE DO
+            MEMBERIKAN REKOMENDASI PAKET KEPADA PENGGUNA
           </h2>
           
           <p class="text-gray-600 leading-relaxed">
-            Kami menggabungkan keahlian telekomunikasi dengan kecerdasan buatan (AI) untuk memberikan solusi yang personal. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Misi kami adalah menjembatani kesenjangan antara penawaran produk Telco dan kebutuhan riil pelanggan. Kami meyakini bahwa setiap pelanggan unik, sehingga solusi paket tidak boleh bersifat umum. Melalui arsitektur data yang cerdas, kami memastikan setiap rekomendasi adalah yang paling relevan.
           </p>
           
           <p class="text-gray-600 leading-relaxed">
-            Dengan model XGBoost yang canggih, kami menganalisis pola perilaku pelanggan untuk merekomendasikan paket yang paling efisien, menghemat biaya, dan meningkatkan kepuasan pelanggan secara keseluruhan.
+            Dengan model prediktif *XGBoost* yang dilatih pada data perilaku historis (seperti pengeluaran, penggunaan data/panggilan, dan riwayat keluhan), kami menganalisis pola customer behavior untuk merekomendasikan *Target Offer* yang paling efisien. Tujuan akhirnya adalah *memaksimalkan *revenue Telco** sekaligus *meningkatkan *Customer Lifetime Value** melalui kepuasan yang optimal.
           </p>
 
           <div class="pt-4">
