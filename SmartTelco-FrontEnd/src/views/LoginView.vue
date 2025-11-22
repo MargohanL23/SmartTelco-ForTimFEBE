@@ -5,7 +5,7 @@
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             class="mx-auto h-12 w-auto"
-            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=rose&shade=500"
+            src="/images/logo_smarttelcoo.png"
             alt="SmartTelco"
           />
           <h2 class="mt-8 text-center text-2xl font-bold tracking-tight" style="color:#842A3B;">

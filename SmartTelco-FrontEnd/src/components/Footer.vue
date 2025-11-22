@@ -1,8 +1,8 @@
 <template>
-  <footer class="mt-0 py-10 bg-[#FFECC8] text-[#842A3B]">
+  <footer class="mt-0 py-6 bg-[#FFECC8] text-[#842A3B]">
 
     <!-- Top Navigation Links -->
-    <div class="flex justify-center space-x-8 text-sm font-semibold mb-6">
+    <div class="flex justify-center space-x-8 text-sm font-semibold mb-4">
       <RouterLink
         to="/home"
         class="hover:opacity-80"

@@ -3,9 +3,13 @@
       <nav class="max-w-8xl mx-auto flex items-center justify-between py-4 px-4">
   
         <!-- Logo -->
-        <h1 class="text-2xl font-bold text-[#842A3B] tracking-wide">
-          SmartTelco
-        </h1>
+        <RouterLink to="/home" class="flex items-center gap-2">
+          <img 
+            src="/images/logo_smarttelcoo.png"
+            alt="SmartTelco Logo"
+            class="h-10 w-auto object-contain"
+          />
+        </RouterLink>
   
         <!-- Nav Links -->
         <div class="flex items-center gap-6 text-[#842A3B] font-medium">
